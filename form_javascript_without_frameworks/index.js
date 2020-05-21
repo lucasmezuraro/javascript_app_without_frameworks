@@ -2,6 +2,7 @@ let itensDiv = document.querySelector('#itens-content');
 let listInput = document.querySelector('#item');
 let alertDiv = document.querySelector('#alert');
 let buttom = document.querySelector('#addButtom');
+var totalItens = 0;
 
 const alertDisplayTime = 4000;
 
@@ -13,7 +14,6 @@ function addAction(event) {
 listInput.addEventListener('keyup', addAction);
 
 buttom.addEventListener('click', function(event) {
-    console.log(event);
     validate() ? add(createItem(listInput.value)) : null;
 });
 
@@ -38,9 +38,15 @@ function errorAlert(message) {
 }
 
 function createItem(description) {
+    totalItens++;
     let newItemElement = document.createElement('li');
+    newItemElement.setAttribute('id', `item_${totalItens}`);
     let text = document.createTextNode(description);
     newItemElement.appendChild(text);
+    
+    let span = document.createElement('span');
+    span.innerHTML = `   <a style="cursor:pointer" onClick="remove('item_${totalItens}')">remover</a>`
+    newItemElement.appendChild(span);
     return newItemElement; 
 }
 
@@ -50,7 +56,7 @@ function checkListExists() {
 
 function createList() {
   let listDiv = document.createElement('ul');
-  listDiv.setAttribute('id', '#list-itens');
+  listDiv.setAttribute('id', 'list-itens');
   return listDiv;
 }
 
@@ -63,5 +69,17 @@ function add(Item) {
         list.appendChild(Item);
     }
     itensDiv.appendChild(list);
+}
+
+function remove(Item) {
+    let element = document.querySelector('#'+Item);
+    let list = checkListExists();
+    if (list) {
+        list.removeChild(element);
+        totalItens--;
+    }else {
+        errorAlert('Undefined list');    
+    }
+    
 }
 

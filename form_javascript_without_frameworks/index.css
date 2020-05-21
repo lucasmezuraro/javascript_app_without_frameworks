@@ -13,7 +13,19 @@
     flex-direction: column;
     background-color: bisque;
     justify-content: center;
-    width: 500px;
-    height: 300px;
+    width: 60%;
+    height: 30%;
     margin-top: 25vh;
 }
+
+.title {
+    font-size: 1.5em;
+    text-align: center;
+    padding-bottom: 15px;
+}
+
+.list {
+    min-width: 200px;
+    min-height: 200px;
+}
+

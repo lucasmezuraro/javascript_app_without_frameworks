@@ -1,13 +1,20 @@
 let itensDiv = document.querySelector('#itens-content');
 let listInput = document.querySelector('#item');
 let alertDiv = document.querySelector('#alert');
+let buttom = document.querySelector('#addButtom');
 
 const alertDisplayTime = 4000;
 
-listInput.addEventListener('keyup', function (event) {
+function addAction(event) {
     if(event.keyCode == '13') 
         validate() ? add(createItem(event.target.value)) : null;
-    
+}
+
+listInput.addEventListener('keyup', addAction);
+
+buttom.addEventListener('click', function(event) {
+    console.log(event);
+    validate() ? add(createItem(listInput.value)) : null;
 });
 
 function validate() {

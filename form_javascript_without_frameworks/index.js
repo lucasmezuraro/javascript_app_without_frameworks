@@ -6,24 +6,23 @@ var totalItens = 0;
 
 const alertDisplayTime = 4000;
 
-function addAction(event) {
-    if(event.keyCode == '13') 
-        validate() ? add(createItem(event.target.value)) : null;
+function addAction(element) {
+    validate() ? add(createItem(element)) : null;
 }
 
-listInput.addEventListener('keyup', addAction);
+function action(event) {
+    if(event.keyCode == '13') {
+        addAction(event.target.value);
+    }else if (event.type == 'click') {
+        addAction(listInput.value);
+    }
+}
 
-buttom.addEventListener('click', function(event) {
-    validate() ? add(createItem(listInput.value)) : null;
-});
+listInput.addEventListener('keyup', action);
+buttom.addEventListener('click', action);
 
 function validate() {
-    if(listInput.value.trim()) {
-        return true;
-    }else {
-        errorAlert('Input is not defined');
-        return false;
-    }
+    return listInput.value.trim() ? true : errorAlert('Field is not defined'); return false;
 }
 
 function errorAlert(message) {
@@ -45,7 +44,7 @@ function createItem(description) {
     newItemElement.appendChild(text);
     
     let span = document.createElement('span');
-    span.innerHTML = `   <a style="cursor:pointer" onClick="remove('item_${totalItens}')">remover</a>`
+    span.innerHTML = `   <a style="cursor:pointer" onClick="remove('item_${totalItens}')">X</a>`
     newItemElement.appendChild(span);
     return newItemElement; 
 }
@@ -80,6 +79,5 @@ function remove(Item) {
     }else {
         errorAlert('Undefined list');    
     }
-    
 }
 

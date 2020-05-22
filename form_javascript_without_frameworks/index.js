@@ -49,7 +49,7 @@ function createItem(description) {
     return newItemElement; 
 }
 
-function checkListExists() {
+function listExists() {
     return document.querySelector('#list-itens');
 }
 
@@ -60,14 +60,14 @@ function createList() {
 }
 
 function add(Item) {
-    let list = checkListExists() ? checkListExists() : createList();
+    let list = listExists() ? listExists() : createList();
     list.appendChild(Item);
     itensDiv.appendChild(list);
 }
 
 function remove(Item) {
     let element = document.querySelector('#'+Item);
-    let list = checkListExists();
+    let list = listExists();
     if (list) {
         list.removeChild(element);
         totalItens--;

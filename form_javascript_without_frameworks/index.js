@@ -60,13 +60,8 @@ function createList() {
 }
 
 function add(Item) {
-    let list = checkListExists();
-    if (list) {
-        list.appendChild(Item);
-    }else {
-        list = createList();
-        list.appendChild(Item);
-    }
+    let list = checkListExists() ? checkListExists() : createList();
+    list.appendChild(Item);
     itensDiv.appendChild(list);
 }
 
